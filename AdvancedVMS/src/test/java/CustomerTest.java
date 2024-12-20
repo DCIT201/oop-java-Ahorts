@@ -51,8 +51,10 @@ class CustomerTest {
     @Test
     void testCustomerEligibility() {
         assertTrue( customer.getCanRent());
-        customer.setCanRent(false);
+       customer.setCanRent(false);
         assertFalse( customer.getCanRent());
+
+        customer.setCanRent(true);
 
         Car car2 = new Car("CAR001", "Hyundai Sonata", 100);
         customer.addRentals(car);
@@ -62,11 +64,13 @@ class CustomerTest {
 
         customer.setCanRent();
         assertFalse( customer.getCanRent());
-
-
-
-
     }
-
+    @Test
+    void testReturnVehicle() {
+        customer.addRentals(car);
+        customer.addRentals(truck);
+        customer.returnVehicle(car);
+        assertEquals(1, customer.getCurrentRentals().size());
+    }
 
 }

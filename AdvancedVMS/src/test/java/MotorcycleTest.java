@@ -27,6 +27,11 @@ import org.junit.jupiter.api.Test;
          assertEquals(1, motorcycle.getSeatCount(), "Seating capacity getter/setter failed");
      }
 
+     @Test
+     void testEncapsulation() {
+         motorcycle.setVehicleId("CAR002");
+         assertEquals("CAR002", motorcycle.getVehicleId(), "Encapsulation test failed for Vehicle ID");
+     }
 
 }
 

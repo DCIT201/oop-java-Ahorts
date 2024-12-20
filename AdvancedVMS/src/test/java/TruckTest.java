@@ -34,5 +34,10 @@ class TruckTest {
         truck.setSeatCount(2);
         assertEquals(2, truck.getSeatCount(), "Seating capacity getter/setter failed");
     }
+    @Test
+    void testEncapsulation() {
+        truck.setVehicleId("CAR002");
+        assertEquals("CAR002", truck.getVehicleId(), "Encapsulation test failed for Vehicle ID");
+    }
 
 }

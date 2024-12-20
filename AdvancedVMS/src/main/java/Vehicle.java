@@ -46,4 +46,9 @@ public abstract class Vehicle {
         return seatCount;
     }
 
+    @Override
+    public String toString(){
+        return "[Vehicle rented: " +  getClass().getSimpleName() + "." + " VehicleId=" + getVehicleId() + " Model=" + getModel() + "]";
+    }
+
 }

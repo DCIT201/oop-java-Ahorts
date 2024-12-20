@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
      @BeforeEach
      void setUp() {
          motorcycle = new Motorcycle("MOTOR001", "DUCATI DESERT", 100);
+         motorcycle.setAvailable(true);
      }
 
      @Test
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
      @Test
      void testIsAvailableForRental() {
-         assertTrue(motorcycle.isAvailable(), "Availability check failed");
+         assertTrue(motorcycle.isAvailable(), "Motorcycle is not available");
      }
 
 

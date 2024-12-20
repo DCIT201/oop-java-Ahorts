@@ -21,6 +21,12 @@ import org.junit.jupiter.api.Test;
          assertTrue(motorcycle.isAvailable(), "Motorcycle is not available");
      }
 
+     @Test
+     void testSetAndGetSeatingCapacity() {
+         motorcycle.setSeatCount(1);
+         assertEquals(1, motorcycle.getSeatCount(), "Seating capacity getter/setter failed");
+     }
+
 
 }
 

@@ -29,5 +29,10 @@ class TruckTest {
         assertTrue(truck.getHasAirConditioners(), "No Air conditioning");
     }
 
+    @Test
+    void testSetAndGetSeatingCapacity() {
+        truck.setSeatCount(2);
+        assertEquals(2, truck.getSeatCount(), "Seating capacity getter/setter failed");
+    }
 
 }

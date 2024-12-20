@@ -31,5 +31,10 @@ import org.junit.jupiter.api.Test;
          assertTrue(car.getHasAirConditioners(), "Air conditioning check failed");
      }
 
+     @Test
+     void testSetAndGetSeatingCapacity() {
+         car.setSeatCount(4);
+         assertEquals(4, car.getSeatCount(), "Seating capacity getter/setter failed");
+     }
 
 }

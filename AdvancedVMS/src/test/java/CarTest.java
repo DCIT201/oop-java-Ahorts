@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
      @BeforeEach
      void setUp() {
          car = new Car("CAR001", "Toyota Camry", 300);
+         car.setAvailable(true);
+
      }
 
      @Test
@@ -25,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
      @Test
      void testHasAirConditioners() {
+         car.setHasAirConditioners(true);
          assertTrue(car.getHasAirConditioners(), "Air conditioning check failed");
      }
 

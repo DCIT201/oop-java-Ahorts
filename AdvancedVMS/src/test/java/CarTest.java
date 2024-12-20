@@ -8,7 +8,23 @@ import org.junit.jupiter.api.Test;
 
      @BeforeEach
      void setUp() {
-         car = new Car("CAR001", "Toyota Camry", 100);
+         car = new Car("CAR001", "Toyota Camry", 300);
      }
+
+     @Test
+     void testCalculateRentalCost() {
+         assertEquals(900, car.calculateRent(3), "Rental cost calculation failed");
+     }
+
+     @Test
+     void testIsAvailableForRental() {
+         assertTrue(car.isAvailable(), "Availability check failed");
+     }
+
+     @Test
+     void testHasAirConditioners() {
+         assertTrue(car.hasAirConditioning(), "Air conditioning check failed");
+     }
+
 
 }

@@ -13,6 +13,8 @@ class TruckTest {
     @Test
     void testCalculateRentalCost() {
         assertEquals(1600, truck.calculateRent(2), "Rental cost calculation failed");
+        truck.setHasAirConditioners(true);
+        assertEquals(2400, truck.calculateRent(2), "Rental cost calculation failed");
     }
 
     @Test
@@ -22,7 +24,7 @@ class TruckTest {
 
     @Test
     void testHasAirConditioners() {
-        assertTrue(truck.hasAirConditioning(), "Air conditioning check failed");
+        assertTrue(truck.getHasAirConditioners(), "Air conditioning check failed");
     }
 
 

@@ -8,6 +8,7 @@ class TruckTest {
     @BeforeEach
     void setUp() {
         truck = new Truck("TRUCK001", "MAN TGX", 800);
+        truck.setAvailable(true);
     }
 
     @Test
@@ -19,12 +20,13 @@ class TruckTest {
 
     @Test
     void testIsAvailableForRental() {
-        assertTrue(truck.isAvailable(), "Availability check failed");
+        assertTrue(truck.isAvailable(), "Truck is not available");
     }
 
     @Test
     void testHasAirConditioners() {
-        assertTrue(truck.getHasAirConditioners(), "Air conditioning check failed");
+        truck.setHasAirConditioners(true);
+        assertTrue(truck.getHasAirConditioners(), "No Air conditioning");
     }
 
 

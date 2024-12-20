@@ -3,6 +3,7 @@ public abstract class Vehicle {
     private String model;
     private double baseRentalRate;
     private boolean isAvailable;
+    private int seatCount;
 
     public Vehicle(String vehicleId, String model, double baseRentalRate) {
         this.vehicleId = vehicleId;
@@ -37,5 +38,12 @@ public abstract class Vehicle {
     }
 
     public abstract double calculateRent(int days);
+
+    public void setSeatCount(int seatCount) {
+        this.seatCount = seatCount;
+    }
+    public int getSeatCount() {
+        return seatCount;
+    }
 
 }

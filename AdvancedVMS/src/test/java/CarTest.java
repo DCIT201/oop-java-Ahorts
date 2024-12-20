@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
      @Test
      void testCalculateRentalCost() {
          assertEquals(900, car.calculateRent(3), "Rental cost calculation failed");
+         car.setHasAirConditioners(true);
+         assertEquals(1350, car.calculateRent(3), "Rental cost calculation failed");
      }
 
      @Test
@@ -23,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
      @Test
      void testHasAirConditioners() {
-         assertTrue(car.hasAirConditioning(), "Air conditioning check failed");
+         assertTrue(car.getHasAirConditioners(), "Air conditioning check failed");
      }
 
 

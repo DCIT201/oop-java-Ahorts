@@ -1,8 +1,8 @@
 public class Truck extends Vehicle implements Rentable{
     private boolean hasAirConditioners;
 
-    public Truck(String vehicleId, String model, double baseRentalRate){
-        super(vehicleId, model, baseRentalRate);
+    public Truck( String model, double baseRentalRate){
+        super(model, baseRentalRate);
     }
 
     @Override

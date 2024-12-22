@@ -1,17 +1,19 @@
 public abstract class Vehicle {
-    private String vehicleId;
+    private static int id = 0;
+    private final int vehicleId;
     private String model;
     private double baseRentalRate;
     private boolean isAvailable;
     private int seatCount;
 
-    public Vehicle(String vehicleId, String model, double baseRentalRate) {
-        this.vehicleId = vehicleId;
+    public Vehicle(String model, double baseRentalRate) {
+        id++;
+        this.vehicleId = id;
         this.model = model;
         this.baseRentalRate = baseRentalRate;
-        this.isAvailable = false;
+        this.isAvailable = true;
     }
-    public String getVehicleId() {
+    public int getVehicleId() {
         return vehicleId;
     }
     public String getModel() {
@@ -27,9 +29,7 @@ public abstract class Vehicle {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
-    }
+
     public void setModel(String model) {
         this.model = model;
     }
@@ -48,7 +48,7 @@ public abstract class Vehicle {
 
     @Override
     public String toString(){
-        return "[Vehicle rented: " +  getClass().getSimpleName() + "." + " VehicleId=" + getVehicleId() + " Model=" + getModel() + "]";
+        return "[Vehicle: " +  getClass().getSimpleName() + "." + " VehicleId=" + getVehicleId() + " Model=" + getModel() + "]";
     }
 
 }

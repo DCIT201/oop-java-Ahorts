@@ -1,7 +1,7 @@
 public class Motorcycle extends Vehicle implements Rentable{
 
-    public Motorcycle(String vehicleId, String model, double baseRentalRate){
-        super(vehicleId, model, baseRentalRate);
+    public Motorcycle( String model, double baseRentalRate){
+        super(model, baseRentalRate);
     }
     @Override
     public double calculateRent(int days) {

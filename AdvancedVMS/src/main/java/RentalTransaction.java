@@ -3,22 +3,24 @@
 import java.time.LocalDate;
 
 public class RentalTransaction {
-    private String transactionId;
-    private Customer customer;
-    private Vehicle vehicle;
-    private LocalDate rentalDate;
-    private int rentalDays;
+    private static int id = 0;
+    private final int transactionId;
+    private final Customer customer;
+    private final Vehicle vehicle;
+    private final LocalDate rentalDate;
+    private  final int rentalDays;
     private boolean isCompleted;
 
-    public RentalTransaction(String transactionId, Customer customer, Vehicle vehicle, LocalDate rentalDate, int rentalDays) {
-        this.transactionId = transactionId;
+    public RentalTransaction( Customer customer, Vehicle vehicle, LocalDate rentalDate, int rentalDays) {
+        id++;
+        this.transactionId = id;
         this.customer = customer;
         this.vehicle = vehicle;
         this.rentalDate = rentalDate;
         this.rentalDays = rentalDays;
         this.isCompleted = false;
     }
-    public String getTransactionId() {
+    public int getTransactionId() {
         return transactionId;
     }
     public Customer getCustomer() {

@@ -19,7 +19,10 @@ public class RentalTransaction {
         this.rentalDate = rentalDate;
         this.rentalDays = rentalDays;
         this.isCompleted = false;
+        vehicle.setAvailable(false);
+        customer.addRentals(vehicle);
     }
+
     public int getTransactionId() {
         return transactionId;
     }
@@ -47,6 +50,8 @@ public class RentalTransaction {
     public double calculateTotalCost() {
         return vehicle.calculateRent(rentalDays);
     }
+
+    // This method marks the transaction as complete when the customer returns the vehicle.
     public void markAsCompleted() {
         if (isCompleted) {
             throw new IllegalStateException("Transaction is already completed.");
@@ -56,14 +61,15 @@ public class RentalTransaction {
         customer.returnVehicle(vehicle);
     }
 
-    // The toString method is overridden here to make basic info about a transaction available when debugging to logging
+    // The toString method is overridden here to make basic info about a transaction available when debugging or logging
     // information
     @Override
     public String toString() {
         return "Transaction [transactionId=" + transactionId +
-                ", customer=" + customer.getCustomerId() +
-                ", vehicle=" + vehicle.getVehicleId() +
+                ", customer=" + customer.getName() +
+                ", vehicle=" + vehicle.getModel() +
                 ", rentalDate=" + rentalDate +
-                ", rentalDays=" + rentalDays + "]";
+                ", rentalDays=" + rentalDays + "," +
+                " Cost=" + this.calculateTotalCost() + "]";
     }
 }

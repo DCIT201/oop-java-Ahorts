@@ -1,8 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class RentalAgencyTest {
     private RentalAgency rentalAgency;
@@ -10,55 +11,71 @@ public class RentalAgencyTest {
     private Motorcycle motorcycle;
     private Truck truck;
     private Customer customer;
-    private RentalTransaction transaction;
 
     // Initialize some mock data to be used in the tests
     @BeforeEach
     void setUp() {
         rentalAgency = new RentalAgency("Ahorts Rentals");
         customer = new Customer("John Doe", "jd@gmail.com");
-        car = new Car( "Toyota Corolla", 50);
-        motorcycle = new Motorcycle("Harley Davidson", 30.0);
-        truck = new Truck( "Ford F-150", 100.0);
+        car = new Car( "Toyota Corolla", 20);
+        motorcycle = new Motorcycle("Harley Davidson", 50.0);
+        truck = new Truck( "Ford F-150", 500.0);
 
         rentalAgency.addVehicle(car);
         rentalAgency.addVehicle(truck);
         rentalAgency.addVehicle(motorcycle);
+
+
     }
     @Test
-    void testAddVehicle() {
-        List<Vehicle> fleet = rentalAgency.getAvailableVehicles();
-        assertTrue(fleet.contains(car));
-        assertEquals(3, fleet.size());
+    void testAvailableVehicle() {
+        // The 3 vehicles added initially are not rented so there are 3 vehicles available for rent.
+        // After renting 2 vehicles, the number of vehicles available for rent should be one.
+
+        assertTrue(rentalAgency.getAvailableVehicles().contains(car));
+        assertEquals(3, rentalAgency.getAvailableVehicles().size());
+
+        rentalAgency.rentVehicle(customer, car, 3);
+        rentalAgency.rentVehicle(customer, motorcycle, 2);
+        assertEquals(1, rentalAgency.getAvailableVehicles().size());
+    }
+
+    // Test to verify how many vehicles are at the agency
+    @Test
+    void testAgencyVehicle() {
+        assertEquals(3, rentalAgency.getAvailableVehicles().size());
     }
     @Test
      void testRemoveVehicle() {
-        rentalAgency.removeVehicle(car);
+        System.out.println(rentalAgency.getAgencyVehicles());
+        rentalAgency.removeVehicle(2);
 
-        List<Vehicle> fleet = rentalAgency.getAvailableVehicles();
-        assertFalse(fleet.contains(car));
-        assertEquals(2, fleet.size());
+        assertFalse( rentalAgency.getAgencyVehicles().contains(motorcycle));
+        assertEquals(2,  rentalAgency.getAgencyVehicles().size());
+        System.out.println(rentalAgency.getAgencyVehicles());
     }
     @Test
-     void testRentVehicleSuccess() {
+     void testRentVehicle() {
+        rentalAgency.rentVehicle(customer, truck, 5);
+        assertFalse(truck.isAvailable());
 
-
-        assertNotNull(transaction);
-        assertEquals(customer, transaction.getCustomer());
-        assertEquals(car, transaction.getVehicle());
-        assertFalse(car.isAvailable());
     }
     @Test
     void testGenerateRentalReport() {
-        // Rent two vehicles
+        // Rent 3 vehicles
         rentalAgency.rentVehicle(customer, car, 3);
         rentalAgency.rentVehicle(customer, motorcycle, 2);
+        rentalAgency.rentVehicle(customer, truck, 10);
 
-//        String report = rentalAgency.generateRentalReport();
-//        assertTrue(report.contains("Customer: John Doe"));
-//        assertTrue(report.contains("Vehicle rented: Toyota Corolla"));
-//        assertTrue(report.contains("Vehicle rented: Harley Davidson"));
+        String report = rentalAgency.generateRentalReport();
+
+        assertTrue(report.contains("customer=John Doe"));
+        assertTrue(report.contains("vehicle=Toyota Corolla"));
+        assertTrue(report.contains("vehicle=Harley Davidson"));
     }
+    @Test
+    void testReturnVehicle() {
 
+    }
 
 }

@@ -41,9 +41,6 @@ public class RentalTransaction {
     public boolean isCompleted() {
         return isCompleted;
     }
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
     public LocalDate getReturnDate(){
         return rentalDate.plusDays(rentalDays);
     }

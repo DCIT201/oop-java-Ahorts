@@ -1,8 +1,7 @@
 public class Car extends Vehicle implements Rentable{
     private boolean hasAirConditioners;
-
-    public Car(String vehicleId, String model, double baseRentalRate){
-        super(vehicleId, model, baseRentalRate);
+    public Car( String model, double baseRentalRate){
+        super( model, baseRentalRate);
     }
 
     public void setHasAirConditioners(boolean hasAirConditioners){

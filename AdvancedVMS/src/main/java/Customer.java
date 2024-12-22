@@ -2,21 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-    private String customerId;
+    private static int id = 0;
+    private final int customerId;
     private String name;
     private String email;
     private List<Vehicle> currentRentals;
     private final List<Vehicle> rentalHistory;
     private boolean canRent = true;
 
-    public Customer(String customerId, String name, String email) {
-        this.customerId = customerId;
+    public Customer(String name, String email) {
+        id++;
+        this.customerId = id;
         this.name = name;
         this.email = email;
         rentalHistory = new ArrayList<>();
         currentRentals = new ArrayList<>();
     }
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
     public String getName() {
@@ -25,9 +27,7 @@ public class Customer {
     public String getEmail() {
         return email;
     }
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -11,23 +11,22 @@ class CustomerTest {
 
     @BeforeEach
     void setUp() {
-        customer = new Customer("CUST001", "David Mason", "david.mason@gmail.com");
-         car = new Car("CAR001", "Honda Accord", 100);
-         truck = new Truck("TRUC001", "Ford F-150", 300);
-         motorcycle = new Motorcycle("MOTOR001", "DUCATI DESERT", 100);
+        customer = new Customer( "David Mason", "david.mason@gmail.com");
+         car = new Car( "Honda Accord", 100);
+         truck = new Truck("Ford F-150", 300);
+         motorcycle = new Motorcycle("DUCATI DESERT", 100);
     }
     @Test
     void testCustomerDetails() {
-        assertEquals("CUST001", customer.getCustomerId(), " Customer ID is incorrect");
+        assertEquals(2, customer.getCustomerId(), " Customer ID is incorrect");
         assertEquals("David Mason", customer.getName(), " Customer Name is incorrect");
         assertEquals("david.mason@gmail.com", customer.getEmail(), " Customer Email is incorrect");
     }
     @Test
     void testSetDetails() {
-        customer.setCustomerId("CUST002");
+
         customer.setName("Simon Riley");
         customer.setEmail("ghost@gmail.com");
-        assertEquals("CUST002", customer.getCustomerId(), " Customer ID is incorrect");
         assertEquals("Simon Riley", customer.getName(), " Customer Name is incorrect");
         assertEquals("ghost@gmail.com", customer.getEmail(), " Customer Email is incorrect");
     }
@@ -56,7 +55,7 @@ class CustomerTest {
 
         customer.setCanRent(true);
 
-        Car car2 = new Car("CAR001", "Hyundai Sonata", 100);
+        Car car2 = new Car( "Hyundai Sonata", 100);
         customer.addRentals(car);
         customer.addRentals(truck);
         customer.addRentals(motorcycle);

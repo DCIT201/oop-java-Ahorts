@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
      @BeforeEach
      void setUp() {
-         car = new Car("CAR001", "Toyota Camry", 300);
+         car = new Car("Toyota Camry", 300);
          car.setAvailable(true);
 
      }
@@ -37,10 +37,6 @@ import org.junit.jupiter.api.Test;
          assertEquals(4, car.getSeatCount(), "Seating capacity getter/setter failed");
      }
 
-     @Test
-     void testEncapsulation() {
-         car.setVehicleId("CAR002");
-         assertEquals("CAR002", car.getVehicleId(), "Encapsulation test failed for Vehicle ID");
-     }
+
 
 }

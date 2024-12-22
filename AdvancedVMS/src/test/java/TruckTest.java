@@ -7,7 +7,7 @@ class TruckTest {
 
     @BeforeEach
     void setUp() {
-        truck = new Truck("TRUCK001", "MAN TGX", 800);
+        truck = new Truck( "MAN TGX", 800);
         truck.setAvailable(true);
     }
 
@@ -34,10 +34,6 @@ class TruckTest {
         truck.setSeatCount(2);
         assertEquals(2, truck.getSeatCount(), "Seating capacity getter/setter failed");
     }
-    @Test
-    void testEncapsulation() {
-        truck.setVehicleId("CAR002");
-        assertEquals("CAR002", truck.getVehicleId(), "Encapsulation test failed for Vehicle ID");
-    }
+
 
 }

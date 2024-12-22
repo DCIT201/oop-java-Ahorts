@@ -2,8 +2,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.List;
 
 public class RentalAgencyTest {
     private RentalAgency rentalAgency;
@@ -77,6 +75,16 @@ public class RentalAgencyTest {
         assertTrue(report.contains("vehicle=Toyota Corolla"));
         assertTrue(report.contains("vehicle=Harley Davidson"));
     }
+    @Test
+    void testReturnVehicle() {
+        rentalAgency.rentVehicle(customer, truck, 10);
+        rentalAgency.rentVehicle(customer, motorcycle, 2);
+        assertFalse(truck.isAvailable());
 
+        rentalAgency.returnVehicle(truck);
+        assertTrue(truck.isAvailable());
+        assertEquals(1, customer.getCurrentRentals().size());
+
+    }
 
 }

@@ -28,6 +28,8 @@ public class RentalAgencyTest {
     @Test
     void testGetAgencyName() {
         assertEquals("Ahorts Rentals", rentalAgency.getAgencyName());
+        rentalAgency.setAgencyName("Ojoe Rentals");
+        assertEquals("Ojoe Rentals", rentalAgency.getAgencyName());
     }
     @Test
     void testAvailableVehicle() {

@@ -28,6 +28,10 @@ public class RentalAgencyTest {
 
     }
     @Test
+    void testGetAgencyName() {
+        assertEquals("Ahorts Rentals", rentalAgency.getAgencyName());
+    }
+    @Test
     void testAvailableVehicle() {
         // The 3 vehicles added initially are not rented so there are 3 vehicles available for rent.
         // After renting 2 vehicles, the number of vehicles available for rent should be one.
@@ -73,9 +77,6 @@ public class RentalAgencyTest {
         assertTrue(report.contains("vehicle=Toyota Corolla"));
         assertTrue(report.contains("vehicle=Harley Davidson"));
     }
-    @Test
-    void testReturnVehicle() {
 
-    }
 
 }

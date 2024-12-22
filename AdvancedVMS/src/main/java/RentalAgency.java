@@ -7,7 +7,7 @@ import java.util.Objects;
 public class RentalAgency {
     private String agencyName;
     List<Vehicle> agencyVehicles;
-    List<RentalTransaction> transactions;
+    List<RentalTransaction>  transactions;
 
     public RentalAgency(String name) {
         this.agencyName = name;
@@ -19,6 +19,9 @@ public class RentalAgency {
     }
     public void setAgencyName(String agencyName) {
         this.agencyName = agencyName;
+    }
+    public List<Vehicle> getAgencyVehicles() {
+        return agencyVehicles;
     }
 
     // This method creates a new list which all currently available vehicles are stored
@@ -49,11 +52,13 @@ public class RentalAgency {
         transactions.add(transaction);
     }
     //return rented vehicle
-    public void returnVehicle(RentalTransaction transaction) {
-        if (transaction.isCompleted()){
-            throw new IllegalStateException("Transaction is already completed. Vehicle returned.");
+    public void returnVehicle(Vehicle vehicle) {
+
+        for (RentalTransaction transaction : transactions) {
+            if (transaction.getVehicle().equals(vehicle)) {
+                transaction.markAsCompleted();
+            }
         }
-        transaction.markAsCompleted();
     }
     public String generateRentalReport() {
         StringBuilder report = new StringBuilder();

@@ -6,7 +6,7 @@ public class Customer {
     private final int customerId;
     private String name;
     private String email;
-    private List<Vehicle> currentRentals;
+    private final List<Vehicle> currentRentals;
     private final List<Vehicle> rentalHistory;
     private boolean canRent = true;
 

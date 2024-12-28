@@ -335,7 +335,25 @@ public class Main {
         System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId());
     }
 
+    private static void viewAllVehicles() {
+        System.out.println("\n*=== All Vehicles ===*");
+        for (Vehicle vehicle : agency.getAgencyVehicles()) {
+            System.out.println(vehicle.toString());
+        }
+    }
 
+    private static void viewAvailableVehicles() {
+        System.out.println("\n*=== Available Vehicles ===*");
+        for (Vehicle vehicle : agency.getAvailableVehicles()) {
+            System.out.println(vehicle.toString());
+        }
+    }
+
+    private static void removeVehicle() {
+        System.out.print("Enter vehicle ID: ");
+        agency.removeVehicle(input.nextInt());
+        System.out.println("Vehicle removed successfully!");
+    }
 }
 
 

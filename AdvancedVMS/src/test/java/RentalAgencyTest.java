@@ -52,8 +52,6 @@ public class RentalAgencyTest {
     @Test
      void testRemoveVehicle() {
         System.out.println(rentalAgency.getAgencyVehicles());
-        // Vehicle id can change resulting in failed test
-        // TODO: Change test structure
         rentalAgency.removeVehicle(8);
 
         assertFalse( rentalAgency.getAgencyVehicles().contains(motorcycle));

@@ -5,6 +5,9 @@ public abstract class Vehicle {
     private double baseRentalRate;
     private boolean isAvailable;
     private int seatCount;
+    private String color;
+    private String transmission;
+    private String fuelType;
 
     public Vehicle(String model, double baseRentalRate) {
         id++;
@@ -12,6 +15,10 @@ public abstract class Vehicle {
         this.model = model;
         this.baseRentalRate = baseRentalRate;
         this.isAvailable = true;
+        this.seatCount = 1;
+        this.color = "white";
+        this.transmission = "automatic";
+        this.fuelType = "petrol";
     }
     public int getVehicleId() {
         return vehicleId;
@@ -28,6 +35,24 @@ public abstract class Vehicle {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public String getTransmission() {
+        return transmission;
+    }
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
+    public String getFuelType() {
+        return fuelType;
+    }
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
     }
 
     public void setModel(String model) {

@@ -263,9 +263,82 @@ public class Main {
 
     }
 
+    private static void addNewMotorcycle() {
+        System.out.print("Enter motorcycle model: ");
+        String model = input.nextLine();
+        System.out.print("Enter base rental rate: ");
+        double rate = input.nextDouble();
+
+        Motorcycle motorcycle = new Motorcycle(model, rate);
+
+        System.out.print("Has Helmet? (true/false): ");
+        motorcycle.setHasHelmet(input.nextBoolean());
+
+        System.out.print("Has Windshield? (true/false): ");
+        motorcycle.setHasWindshield(input.nextBoolean());
+
+        System.out.print("Has Storage Box? (true/false): ");
+        motorcycle.setHasStorageBox(input.nextBoolean());
+
+
+        System.out.print("Enter color: ");
+        motorcycle.setColor(input.nextLine());
+
+        System.out.print("Enter seat count: ");
+        motorcycle.setSeatCount(input.nextInt());
+
+        System.out.print("Enter transmission type: ");
+        motorcycle.setTransmission(input.nextLine());
+
+        System.out.print("Enter fuel type: ");
+        motorcycle.setFuelType(input.nextLine());
+
+        agency.addVehicle(motorcycle);
+        System.out.println("Motorcycle added successfully! Vehicle ID: " + motorcycle.getVehicleId());
+
+    }
+
+    private static void addNewTruck() {
+        System.out.print("Enter truck model: ");
+        String model = input.nextLine();
+        System.out.print("Enter base rental rate: ");
+        double rate = input.nextDouble();
+
+        Truck truck = new Truck(model, rate);
+
+        System.out.print("Has Air Conditioners? (true/false): ");
+        truck.setHasAirConditioners(input.nextBoolean());
+
+        System.out.print("Has camera? (true/false): ");
+        truck.setHasCamera(input.nextBoolean());
+
+        System.out.print("Has GPS? (true/false): ");
+        truck.setHasGPS(input.nextBoolean());
+
+        System.out.print("Has Hydraulics? (true/false): ");
+        truck.setHasHydraulics(input.nextBoolean());
+
+
+        System.out.print("Enter color: ");
+        truck.setColor(input.nextLine());
+
+        System.out.print("Enter seat count: ");
+        truck.setSeatCount(input.nextInt());
+
+        System.out.print("Enter transmission type: ");
+        truck.setTransmission(input.nextLine());
+
+        System.out.print("Enter fuel type: ");
+        truck.setFuelType(input.nextLine());
+
+        agency.addVehicle(truck);
+        System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId());
+    }
 
 
 }
+
+
 
 
 

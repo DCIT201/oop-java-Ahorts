@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -52,9 +53,10 @@ public class Main {
         while (true) {
             System.out.println("\n*=== Customer Operations ===*");
             System.out.println("1. Add New Customer");
-            System.out.println("2. View Customer Rental History");
-            System.out.println("3. View Customer Current Rentals");
-            System.out.println("4. Back to Main Menu");
+            System.out.println("2. View All Customers");
+            System.out.println("3. View Customer Rental History");
+            System.out.println("4. View Customer Current Rentals");
+            System.out.println("5. Back to Main Menu");
             System.out.println("\n Select an option: ");
 
             int choice = input.nextInt();
@@ -64,12 +66,14 @@ public class Main {
                     addNewCustomer();
                     break;
                 case 2:
+                    viewCustomers();
+                case 3:
                     viewCustomerHistory();
                     break;
-                case 3:
+                case 4:
                     viewCustomerCurrentRentals();
                     break;
-                case 4:
+                case 5:
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -160,14 +164,109 @@ public class Main {
                 case 2:
                     displayMainMenu();
                     break;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
+                default:
+                    System.out.println("Invalid choice. Please try again.");
 
             }
         }
     }
 
+    // Customer Operations methods
+    private static void addNewCustomer() {
+        System.out.print("Enter customer name: ");
+        String name = input.nextLine();
+        System.out.print("Enter customer email: ");
+        String email = input.nextLine();
+
+        Customer customer = new Customer(name, email);
+        System.out.println("Customer added successfully! Customer ID: " + customer.getCustomerId());
+    }
+
+    private static void viewCustomers() {
+        System.out.println("*=== Rental Customers ===*");
+
+        for (Customer customer : Customer.getCustomers()) {
+            System.out.println("Customer ID: " + customer.getCustomerId() + " Name: " + customer.getName() + " Email: "
+                    + customer.getEmail());
+        }
+    }
+
+    private static void viewCustomerHistory() {
+        System.out.print("Enter customer ID: ");
+        int id = input.nextInt();
+
+        for (Customer customer : Customer.getCustomers()) {
+            if (customer.getCustomerId() == id) {
+                System.out.println("Customer ID: " + customer.getCustomerId());
+                System.out.println("Name: " + customer.getName());
+                System.out.println("Email: " + customer.getEmail());
+                System.out.println("\n*=== Customer History ===*");
+                for (Vehicle vehicle : customer.getRentalHistory()) {
+                    System.out.println(vehicle.toString());
+                }
+
+            }
+        }
+
+
+    }
+
+    private static void viewCustomerCurrentRentals() {
+        System.out.print("Enter customer ID: ");
+        int id = input.nextInt();
+        for (Customer customer : Customer.getCustomers()) {
+            if (customer.getCustomerId() == id) {
+                System.out.println("Customer ID: " + customer.getCustomerId());
+                System.out.println("Name: " + customer.getName());
+                System.out.println("Email: " + customer.getEmail());
+                System.out.println("\n*=== Customer Rentals ===*");
+                for (Vehicle vehicle : customer.getCurrentRentals()) {
+                    System.out.println(vehicle.toString());
+                }
+            }
+        }
+    }
+
+    // Vehicle Operations methods
+    private static void addNewCar() {
+        System.out.print("Enter car model: ");
+        String model = input.nextLine();
+        System.out.print("Enter base rental rate: ");
+        double rate = input.nextDouble();
+
+        Car car = new Car(model, rate);
+        System.out.print("Has Air Conditioners? (true/false)");
+        car.setHasAirConditioners(input.nextBoolean());
+
+        System.out.print("Has child seats? (true/false): ");
+        car.setHasChildSeats(input.nextBoolean());
+
+        System.out.print("Has GPS? (true/false): ");
+        car.setHasGPS(input.nextBoolean());
+
+        System.out.print("Has camera? (true/false): ");
+        car.setHasCamera(input.nextBoolean());
+
+        System.out.print("Enter seat count: ");
+        car.setSeatCount(input.nextInt());
+
+
+        System.out.print("Enter color: ");
+        car.setColor(input.nextLine());
+        System.out.print("Enter transmission type: ");
+        car.setTransmission(input.nextLine());
+        System.out.print("Enter fuel type: ");
+        car.setFuelType(input.nextLine());
+
+        agency.addVehicle(car);
+        System.out.println("Car added successfully! Vehicle ID: " + car.getVehicleId());
+
+    }
+
+
 
 }
+
+
 
 

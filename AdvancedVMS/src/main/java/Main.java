@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -354,9 +355,49 @@ public class Main {
         agency.removeVehicle(input.nextInt());
         System.out.println("Vehicle removed successfully!");
     }
+
+
+    // Rental Operations methods
+    private static void rentVehicle() {
+        System.out.print("Enter Customer ID: ");
+        int customerId = input.nextInt();
+
+        System.out.print("Enter vehicle ID: ");
+        int vehicleId = input.nextInt();
+        System.out.print("Enter number of days to rent: ");
+        int daysToRent = input.nextInt();
+
+        agency.rentVehicle(findCustomer(customerId),
+                Objects.requireNonNull(findVehicle(vehicleId)),
+                daysToRent);
+    }
+
+    private static void returnVehicle() {
+        System.out.print("Enter vehicle ID to return: ");
+        int vehicleId = input.nextInt();
+        agency.returnVehicle(findVehicle(vehicleId));
+
+    }
+
+    private static Vehicle findVehicle(int vehicleId) {
+        for (Vehicle vehicle : agency.getAgencyVehicles()) {
+            if (vehicle.getVehicleId() == vehicleId) {
+                return vehicle;
+            }
+        }
+        return null;
+    }
+
+    private static Customer findCustomer(int customerId) {
+        for (Customer customer : Customer.getCustomers()) {
+            if (customer.getCustomerId() == customerId) {
+                return customer;
+            }
+
+        }
+        return null;
+    }
 }
-
-
 
 
 

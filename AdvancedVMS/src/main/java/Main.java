@@ -1,15 +1,21 @@
-import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
+    // Two scanner instances are initialized here namely input and stringInput. Initially, input was used for all input
+    // data types. However, this resulted in some string fields empty since nextLine() consumes the new line
+    // character. One way to deal with this was to use  nextLine() twice for the first to consume the new line
+    // character and the second accept the string input. But I didn't feel like littering the code with all those
+    // extra lines so, separating the string data type from the rest with its own scanner instance seems to fix that.
+
     static Scanner input = new Scanner(System.in);
+    static Scanner stringInput = new Scanner(System.in);
     static RentalAgency agency;
 
     public static void main(String[] args) {
         System.out.println("*===Welcome to Advanced Vehicle Rental Management System!*===");
         System.out.print("Enter the name of your agency: ");
-        String agencyName = input.nextLine();
+        String agencyName = stringInput.nextLine();
         agency = new RentalAgency(agencyName);
 
 
@@ -68,6 +74,7 @@ public class Main {
                     break;
                 case 2:
                     viewCustomers();
+                    break;
                 case 3:
                     viewCustomerHistory();
                     break;
@@ -142,7 +149,7 @@ public class Main {
                     returnVehicle();
                     break;
                 case 3:
-                    displayMainMenu();
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -153,7 +160,7 @@ public class Main {
         while (true) {
             System.out.println("\n*=== Reports ===*");
             System.out.println("1. Print All Reports");
-            System.out.println("Main Menu");
+            System.out.println("2. Main Menu");
             System.out.println("\nSelect an option: ");
 
             int choice = input.nextInt();
@@ -163,8 +170,7 @@ public class Main {
                     System.out.println(agency.generateRentalReport());
                     break;
                 case 2:
-                    displayMainMenu();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
 
@@ -174,10 +180,11 @@ public class Main {
 
     // Customer Operations methods
     private static void addNewCustomer() {
-        System.out.print("Enter customer name: ");
-        String name = input.nextLine();
-        System.out.print("Enter customer email: ");
-        String email = input.nextLine();
+        System.out.println("Enter customer name: ");
+        String name = stringInput.nextLine();
+
+        System.out.println("Enter customer email: ");
+        String email = stringInput.nextLine();
 
         Customer customer = new Customer(name, email);
         System.out.println("Customer added successfully! Customer ID: " + customer.getCustomerId());
@@ -231,7 +238,7 @@ public class Main {
     // Vehicle Operations methods
     private static void addNewCar() {
         System.out.print("Enter car model: ");
-        String model = input.nextLine();
+        String model = stringInput.nextLine();
         System.out.print("Enter base rental rate: ");
         double rate = input.nextDouble();
 
@@ -253,11 +260,11 @@ public class Main {
 
 
         System.out.print("Enter color: ");
-        car.setColor(input.nextLine());
+        car.setColor(stringInput.nextLine());
         System.out.print("Enter transmission type: ");
-        car.setTransmission(input.nextLine());
+        car.setTransmission(stringInput.nextLine());
         System.out.print("Enter fuel type: ");
-        car.setFuelType(input.nextLine());
+        car.setFuelType(stringInput.nextLine());
 
         agency.addVehicle(car);
         System.out.println("Car added successfully! Vehicle ID: " + car.getVehicleId());
@@ -266,7 +273,7 @@ public class Main {
 
     private static void addNewMotorcycle() {
         System.out.print("Enter motorcycle model: ");
-        String model = input.nextLine();
+        String model = stringInput.nextLine();
         System.out.print("Enter base rental rate: ");
         double rate = input.nextDouble();
 
@@ -283,16 +290,16 @@ public class Main {
 
 
         System.out.print("Enter color: ");
-        motorcycle.setColor(input.nextLine());
+        motorcycle.setColor(stringInput.nextLine());
 
         System.out.print("Enter seat count: ");
         motorcycle.setSeatCount(input.nextInt());
 
         System.out.print("Enter transmission type: ");
-        motorcycle.setTransmission(input.nextLine());
+        motorcycle.setTransmission(stringInput.nextLine());
 
         System.out.print("Enter fuel type: ");
-        motorcycle.setFuelType(input.nextLine());
+        motorcycle.setFuelType(stringInput.nextLine());
 
         agency.addVehicle(motorcycle);
         System.out.println("Motorcycle added successfully! Vehicle ID: " + motorcycle.getVehicleId());
@@ -301,7 +308,7 @@ public class Main {
 
     private static void addNewTruck() {
         System.out.print("Enter truck model: ");
-        String model = input.nextLine();
+        String model = stringInput.nextLine();
         System.out.print("Enter base rental rate: ");
         double rate = input.nextDouble();
 
@@ -321,16 +328,16 @@ public class Main {
 
 
         System.out.print("Enter color: ");
-        truck.setColor(input.nextLine());
+        truck.setColor(stringInput.nextLine());
 
         System.out.print("Enter seat count: ");
         truck.setSeatCount(input.nextInt());
 
         System.out.print("Enter transmission type: ");
-        truck.setTransmission(input.nextLine());
+        truck.setTransmission(stringInput.nextLine());
 
         System.out.print("Enter fuel type: ");
-        truck.setFuelType(input.nextLine());
+        truck.setFuelType(stringInput.nextLine());
 
         agency.addVehicle(truck);
         System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId());

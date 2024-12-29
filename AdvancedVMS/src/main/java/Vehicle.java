@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Vehicle {
     private static int id = 0;
     private final int vehicleId;
@@ -8,6 +11,8 @@ public abstract class Vehicle {
     private String color;
     private String transmission;
     private String fuelType;
+    protected Set<String> activeFeatures;
+
 
     public Vehicle(String model, double baseRentalRate) {
         id++;
@@ -19,6 +24,7 @@ public abstract class Vehicle {
         this.color = "white";
         this.transmission = "automatic";
         this.fuelType = "petrol";
+        this.activeFeatures = new HashSet<>();
     }
     public int getVehicleId() {
         return vehicleId;

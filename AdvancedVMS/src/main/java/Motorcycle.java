@@ -10,12 +10,27 @@ public class Motorcycle extends Vehicle implements Rentable{
         this.hasWindshield = false;
     }
     public void setHasStorageBox(boolean hasStorageBox){
+        if (hasStorageBox){
+            activeFeatures.add("STORAGE");
+        } else {
+            activeFeatures.remove("STORAGE");
+        }
         this.hasStorageBox = hasStorageBox;
     }
-    public void setHasHelmet(boolean hasHelmet){
+    public void setHasHelmet(boolean hasHelmet) {
+        if (hasHelmet){
+            activeFeatures.add("HELMET");
+        } else {
+            activeFeatures.remove("HELMET");
+        }
         this.hasHelmet = hasHelmet;
     }
     public void setHasWindshield(boolean hasWindshield){
+        if (hasWindshield){
+            activeFeatures.add("WINDSHIELD");
+        } else {
+            activeFeatures.remove("WINDSHIELD");
+        }
         this.hasWindshield = hasWindshield;
     }
     public boolean hasHelmet(){
@@ -30,7 +45,7 @@ public class Motorcycle extends Vehicle implements Rentable{
 
     @Override
     public double calculateRent(int days) {
-        return days * super.getBaseRentalRate();
+        return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);
     }
 
     public double rent(Customer customer, int days){

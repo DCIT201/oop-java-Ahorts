@@ -5,31 +5,49 @@ public class Car extends Vehicle implements Rentable{
     private boolean hasCamera;
     public Car( String model, double baseRentalRate){
         super( model, baseRentalRate);
-        hasCamera = false;
-        hasGPS = false;
-        hasAirConditioners = false;
-        hasChildSeats = false;
+
     }
 
     public void setHasAirConditioners(boolean hasAirConditioners){
+        if(hasAirConditioners){
+            activeFeatures.add("AC");
+        }else {
+            activeFeatures.remove("AC");
+        }
         this.hasAirConditioners = hasAirConditioners;
     }
     public boolean getHasAirConditioners(){
         return this.hasAirConditioners;
     }
     public void setHasChildSeats(boolean hasChildSeats){
+        if(hasChildSeats){
+            activeFeatures.add("CHILD_SEATS");
+        }
+        else{
+            activeFeatures.remove("CHILD_SEATS");
+        }
         this.hasChildSeats = hasChildSeats;
     }
     public boolean getHasChildSeats(){
         return hasChildSeats;
     }
     public void setHasGPS(boolean hasGPS){
+        if (hasGPS){
+            activeFeatures.add("GPS");
+        } else {
+            activeFeatures.remove("GPS");
+        }
         this.hasGPS = hasGPS;
     }
     public boolean getHasGPS(){
         return hasGPS;
     }
     public void setHasCamera(boolean hasCamera){
+        if(hasCamera){
+            activeFeatures.add("CAMERA");
+        } else {
+            activeFeatures.remove("CAMERA");
+        }
         this.hasCamera = hasCamera;
     }
     public boolean getHasCamera(){
@@ -38,11 +56,7 @@ public class Car extends Vehicle implements Rentable{
 
     @Override
     public double calculateRent(int days) {
-        if (hasAirConditioners){
-            return getBaseRentalRate() * days * 1.5;
-        }
-
-        return getBaseRentalRate() * days;
+        return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);
     }
 
     public double rent(Customer customer, int days){

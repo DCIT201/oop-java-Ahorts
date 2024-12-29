@@ -11,18 +11,33 @@ public class Truck extends Vehicle implements Rentable{
         hasAirConditioners = false;
     }
     public void setHasGPS(boolean hasGPS){
+        if (hasGPS){
+            activeFeatures.add("GPS");
+        } else {
+            activeFeatures.remove("GPS");
+        }
         this.hasGPS = hasGPS;
     }
     public boolean getHasGPS(){
         return hasGPS;
     }
     public void setHasCamera(boolean hasCamera){
+        if(hasCamera){
+            activeFeatures.add("CAMERA");
+        } else {
+            activeFeatures.remove("CAMERA");
+        }
         this.hasCamera = hasCamera;
     }
     public boolean getHasCamera(){
         return hasCamera;
     }
     public void setHasHydraulics(boolean hasHydraulics){
+        if (hasHydraulics){
+            activeFeatures.add("HYDRAULICS");
+        } else {
+            activeFeatures.remove("HYDRAULICS");
+        }
         this.hasHydraulics = hasHydraulics;
     }
     public boolean getHasHydraulics(){
@@ -31,13 +46,15 @@ public class Truck extends Vehicle implements Rentable{
 
     @Override
     public double calculateRent(int days) {
-        if (hasAirConditioners) {
-            return days * super.getBaseRentalRate() * 1.5;
-        }
-        return days * super.getBaseRentalRate();
+        return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);
     }
 
     public void setHasAirConditioners(boolean hasAirConditioners){
+        if (hasAirConditioners) {
+            activeFeatures.add("AC");
+        } else {
+            activeFeatures.remove("AC");
+        }
         this.hasAirConditioners = hasAirConditioners;
     }
     public boolean getHasAirConditioners(){

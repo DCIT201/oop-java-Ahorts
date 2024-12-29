@@ -41,6 +41,7 @@ public class Car extends Vehicle implements Rentable{
         if (hasAirConditioners){
             return getBaseRentalRate() * days * 1.5;
         }
+
         return getBaseRentalRate() * days;
     }
 

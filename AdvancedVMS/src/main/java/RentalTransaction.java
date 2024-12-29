@@ -23,9 +23,6 @@ public class RentalTransaction {
         customer.addRentals(vehicle);
     }
 
-    public int getTransactionId() {
-        return transactionId;
-    }
     public Customer getCustomer() {
         return customer;
     }
@@ -34,9 +31,6 @@ public class RentalTransaction {
     }
     public LocalDate getRentalDate() {
         return rentalDate;
-    }
-    public int getRentalDays() {
-        return rentalDays;
     }
     public boolean isCompleted() {
         return isCompleted;
@@ -67,6 +61,8 @@ public class RentalTransaction {
                 ", vehicle=" + vehicle.getModel() +
                 ", rentalDate=" + rentalDate +
                 ", rentalDays=" + rentalDays + "," +
+                ", returnDate=" + this.getReturnDate() +
+                ", isCompleted=" + isCompleted +
                 " Cost=" + this.calculateTotalCost() + "]";
     }
 }

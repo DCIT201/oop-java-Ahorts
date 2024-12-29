@@ -6,8 +6,9 @@ import java.util.Objects;
 
 public class RentalAgency {
     private String agencyName;
-    List<Vehicle> agencyVehicles;
-    List<RentalTransaction>  transactions;
+   private final List<Vehicle> agencyVehicles;
+    private final List<RentalTransaction>  transactions;
+
 
     public RentalAgency(String name) {
         this.agencyName = name;

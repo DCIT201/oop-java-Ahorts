@@ -7,6 +7,7 @@ public class Main {
     // character. One way to deal with this was to use  nextLine() twice for the first to consume the new line
     // character and the second accept the string input. But I didn't feel like littering the code with all those
     // extra lines so, separating the string data type from the rest with its own scanner instance seems to fix that.
+    // Update: Decided to fix the issue with functions which also validates the input
 
     static Scanner input = new Scanner(System.in);
     static Scanner stringInput = new Scanner(System.in);
@@ -14,11 +15,9 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("*===Welcome to Advanced Vehicle Rental Management System!*===");
-        System.out.print("Enter the name of your agency: ");
-        String agencyName = stringInput.nextLine();
+        String agencyName = getString("Enter your agency name: ");
         agency = new RentalAgency(agencyName);
-
-
+        
         do {
             displayMainMenu();
             System.out.println("\nSelect an option: ");
@@ -180,11 +179,8 @@ public class Main {
 
     // Customer Operations methods
     private static void addNewCustomer() {
-        System.out.println("Enter customer name: ");
-        String name = stringInput.nextLine();
-
-        System.out.println("Enter customer email: ");
-        String email = stringInput.nextLine();
+        String name = getString("Enter customer name: ");
+        String email = getString("Enter customer email: ");
 
         Customer customer = new Customer(name, email);
         System.out.println("Customer added successfully! Customer ID: " + customer.getCustomerId());
@@ -200,8 +196,7 @@ public class Main {
     }
 
     private static void viewCustomerHistory() {
-        System.out.print("Enter customer ID: ");
-        int id = input.nextInt();
+        int id = getInt("Enter customer ID: ");
 
         for (Customer customer : Customer.getCustomers()) {
             if (customer.getCustomerId() == id) {
@@ -220,8 +215,7 @@ public class Main {
     }
 
     private static void viewCustomerCurrentRentals() {
-        System.out.print("Enter customer ID: ");
-        int id = input.nextInt();
+        int id = getInt("Enter customer ID: ");
         for (Customer customer : Customer.getCustomers()) {
             if (customer.getCustomerId() == id) {
                 System.out.println("Customer ID: " + customer.getCustomerId());
@@ -237,110 +231,66 @@ public class Main {
 
     // Vehicle Operations methods
     private static void addNewCar() {
-        System.out.print("Enter car model: ");
-        String model = stringInput.nextLine();
-        System.out.print("Enter base rental rate: ");
-        double rate = input.nextDouble();
+        String model = getString("Enter car model: ");
+        double rate = getDouble("Enter base rental rate: ");
 
         Car car = new Car(model, rate);
-        System.out.print("Has Air Conditioners? (true/false)");
-        car.setHasAirConditioners(input.nextBoolean());
-
-        System.out.print("Has child seats? (true/false): ");
-        car.setHasChildSeats(input.nextBoolean());
-
-        System.out.print("Has GPS? (true/false): ");
-        car.setHasGPS(input.nextBoolean());
-
-        System.out.print("Has camera? (true/false): ");
-        car.setHasCamera(input.nextBoolean());
-
-        System.out.print("Enter seat count: ");
-        car.setSeatCount(input.nextInt());
-
-
-        System.out.print("Enter color: ");
-        car.setColor(stringInput.nextLine());
-        System.out.print("Enter transmission type: ");
-        car.setTransmission(stringInput.nextLine());
-        System.out.print("Enter fuel type: ");
-        car.setFuelType(stringInput.nextLine());
+        
+        car.setHasAirConditioners(getBoolean("Has Air Conditioners? (true/false): "));
+        car.setHasChildSeats(getBoolean("Has Child Seats? (true/false): "));
+        car.setHasGPS(getBoolean("Has GPS? (true/false): "));
+        car.setHasCamera(getBoolean("Has camera? (true/false): "));
+        car.setSeatCount(getInt("Enter seat count: "));
+        
+        car.setColor(getString("Enter color: "));
+        car.setTransmission(getString("Enter transmission type: "));
+        car.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(car);
-        System.out.println("Car added successfully! Vehicle ID: " + car.getVehicleId());
-
+        System.out.println("\nCar added successfully! Vehicle ID: " + car.getVehicleId() + "Model: " + car.getModel());
     }
 
     private static void addNewMotorcycle() {
-        System.out.print("Enter motorcycle model: ");
-        String model = stringInput.nextLine();
-        System.out.print("Enter base rental rate: ");
-        double rate = input.nextDouble();
+        String model = getString("Enter motorcycle model: ");
+        double rate = getDouble("Enter base rental rate: ");
 
         Motorcycle motorcycle = new Motorcycle(model, rate);
 
-        System.out.print("Has Helmet? (true/false): ");
-        motorcycle.setHasHelmet(input.nextBoolean());
+        motorcycle.setHasHelmet(getBoolean("Has Helmet? (true/false): "));
+        motorcycle.setHasWindshield(getBoolean("Has Windshield? (true/false): "));
+        motorcycle.setHasStorageBox(getBoolean("Has Storage Box? (true/false): "));
 
-        System.out.print("Has Windshield? (true/false): ");
-        motorcycle.setHasWindshield(input.nextBoolean());
-
-        System.out.print("Has Storage Box? (true/false): ");
-        motorcycle.setHasStorageBox(input.nextBoolean());
-
-
-        System.out.print("Enter color: ");
-        motorcycle.setColor(stringInput.nextLine());
-
-        System.out.print("Enter seat count: ");
-        motorcycle.setSeatCount(input.nextInt());
-
-        System.out.print("Enter transmission type: ");
-        motorcycle.setTransmission(stringInput.nextLine());
-
-        System.out.print("Enter fuel type: ");
-        motorcycle.setFuelType(stringInput.nextLine());
+        motorcycle.setColor(getString("Enter color: "));
+        motorcycle.setSeatCount(getInt("Enter seat count: "));
+        motorcycle.setTransmission(getString("Enter transmission type: "));
+        motorcycle.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(motorcycle);
-        System.out.println("Motorcycle added successfully! Vehicle ID: " + motorcycle.getVehicleId());
+        System.out.println("Motorcycle added successfully! Vehicle ID: " + motorcycle.getVehicleId() 
+                + "Model: " + motorcycle.getModel());
 
     }
 
     private static void addNewTruck() {
-        System.out.print("Enter truck model: ");
-        String model = stringInput.nextLine();
-        System.out.print("Enter base rental rate: ");
-        double rate = input.nextDouble();
+        String model = getString("Enter truck model: ");
+        double rate = getDouble("Enter base rental rate: ");
 
         Truck truck = new Truck(model, rate);
 
-        System.out.print("Has Air Conditioners? (true/false): ");
-        truck.setHasAirConditioners(input.nextBoolean());
-
-        System.out.print("Has camera? (true/false): ");
-        truck.setHasCamera(input.nextBoolean());
-
-        System.out.print("Has GPS? (true/false): ");
-        truck.setHasGPS(input.nextBoolean());
-
-        System.out.print("Has Hydraulics? (true/false): ");
-        truck.setHasHydraulics(input.nextBoolean());
+        truck.setHasAirConditioners(getBoolean("Has Air Conditioners? (true/false): "));
+        truck.setHasCamera(getBoolean("Has camera? (true/false): "));
+        truck.setHasGPS(getBoolean("Has GPS? (true/false): "));
+        truck.setHasHydraulics(getBoolean("Has Hydraulics? (true/false): "));
 
 
-        System.out.print("Enter color: ");
-        truck.setColor(stringInput.nextLine());
-
-        System.out.print("Enter seat count: ");
-        truck.setSeatCount(input.nextInt());
-
-        System.out.print("Enter transmission type: ");
-        truck.setTransmission(stringInput.nextLine());
-
-        System.out.print("Enter fuel type: ");
-        truck.setFuelType(stringInput.nextLine());
+        truck.setColor(getString("Enter color: "));
+        truck.setSeatCount(getInt("Enter seat count: "));
+        truck.setTransmission(getString("Enter transmission type: "));
+        truck.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(truck);
-        System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId());
+        System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId() + 
+                "Model: " + truck.getModel());
     }
 
     private static void viewAllVehicles() {
@@ -366,13 +316,9 @@ public class Main {
 
     // Rental Operations methods
     private static void rentVehicle() {
-        System.out.print("Enter Customer ID: ");
-        int customerId = input.nextInt();
-
-        System.out.print("Enter vehicle ID: ");
-        int vehicleId = input.nextInt();
-        System.out.print("Enter number of days to rent: ");
-        int daysToRent = input.nextInt();
+        int customerId = getInt("Enter customer ID: ");
+        int vehicleId = getInt("Enter vehicle ID: ");
+        int daysToRent = getInt("Enter days to rent: ");
 
         agency.rentVehicle(findCustomer(customerId),
                 Objects.requireNonNull(findVehicle(vehicleId)),
@@ -380,8 +326,7 @@ public class Main {
     }
 
     private static void returnVehicle() {
-        System.out.print("Enter vehicle ID to return: ");
-        int vehicleId = input.nextInt();
+        int vehicleId = getInt("Enter vehicle ID to return: ");
         agency.returnVehicle(findVehicle(vehicleId));
 
     }
@@ -403,6 +348,41 @@ public class Main {
 
         }
         return null;
+    }
+// Methods to ask for input.
+    private static int getInt(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                return Integer.parseInt(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Enter an integer");
+            }
+        }
+    }
+    private static double getDouble(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                return Double.parseDouble(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a number (Integer/Double)");
+            }
+        }
+    }
+    private static boolean getBoolean(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String answer = input.nextLine().toLowerCase();
+            if (answer.equals("true") || answer.equals("false")) {
+                return Boolean.parseBoolean(answer);
+            }
+            System.out.println("Please enter true or false.");
+        }
+    }
+    private static String getString(String prompt) {
+        System.out.print(prompt);
+        return stringInput.nextLine();
     }
 }
 

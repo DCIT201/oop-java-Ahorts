@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Customer {
     private static int id = 0;
+    private static final List<Customer> customers = new ArrayList<>();
     private final int customerId;
     private String name;
     private String email;
@@ -17,6 +18,11 @@ public class Customer {
         this.email = email;
         rentalHistory = new ArrayList<>();
         currentRentals = new ArrayList<>();
+        customers.add(this);
+
+    }
+    public static List<Customer> getCustomers() {
+        return customers;
     }
     public int getCustomerId() {
         return customerId;

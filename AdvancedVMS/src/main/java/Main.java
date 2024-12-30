@@ -17,7 +17,7 @@ public class Main {
         System.out.println("*===Welcome to Advanced Vehicle Rental Management System!*===");
         String agencyName = getString("Enter your agency name: ");
         agency = new RentalAgency(agencyName);
-        
+
         do {
             displayMainMenu();
             System.out.println("\nSelect an option: ");
@@ -99,7 +99,8 @@ public class Main {
             System.out.println("4. View All Vehicles");
             System.out.println("5. View Available Vehicles");
             System.out.println("6. Remove Vehicle");
-            System.out.println("7. Back to Main Menu");
+            System.out.println("7. Edit Vehicle");
+            System.out.println("8. Back to Main Menu");
             System.out.println("\n Select an option: ");
 
             int choice = input.nextInt();
@@ -123,6 +124,9 @@ public class Main {
                     removeVehicle();
                     break;
                 case 7:
+                    editVehicle();
+                    break;
+                case 8:
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -235,20 +239,20 @@ public class Main {
         double rate = getDouble("Enter base rental rate: ");
 
         Car car = new Car(model, rate);
-        
+
         car.setHasAirConditioners(getBoolean("Has Air Conditioners? (true/false): "));
         car.setHasChildSeats(getBoolean("Has Child Seats? (true/false): "));
         car.setHasGPS(getBoolean("Has GPS? (true/false): "));
         car.setHasCamera(getBoolean("Has camera? (true/false): "));
         car.setSeatCount(getInt("Enter seat count: "));
-        
+
         car.setColor(getString("Enter color: "));
         car.setTransmission(getString("Enter transmission type: "));
         car.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(car);
         System.out.println("\nCar added successfully! Vehicle ID: " + car.getVehicleId() + " || Model: " + car.getModel()
-        + " || Rental rate: " + RentCalculator.calculateFinalRate(rate, car.activeFeatures));
+                + " || Rental rate: " + RentCalculator.calculateFinalRate(rate, car.activeFeatures));
     }
 
     private static void addNewMotorcycle() {
@@ -267,7 +271,7 @@ public class Main {
         motorcycle.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(motorcycle);
-        System.out.println("Motorcycle added successfully! Vehicle ID: " + motorcycle.getVehicleId() 
+        System.out.println("Motorcycle added successfully! Vehicle ID: " + motorcycle.getVehicleId()
                 + "Model: " + motorcycle.getModel());
 
     }
@@ -290,7 +294,7 @@ public class Main {
         truck.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(truck);
-        System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId() + 
+        System.out.println("Truck added successfully! Vehicle ID: " + truck.getVehicleId() +
                 "Model: " + truck.getModel());
     }
 
@@ -309,9 +313,28 @@ public class Main {
     }
 
     private static void removeVehicle() {
-        System.out.print("Enter vehicle ID: ");
-        agency.removeVehicle(input.nextInt());
+        agency.removeVehicle(getInt("Enter vehicle ID: "));
         System.out.println("Vehicle removed successfully!");
+    }
+
+    private static void editVehicle() {
+      Vehicle vehicle =  findVehicle(getInt("Enter vehicle ID: "));
+        assert vehicle != null;
+        vehicle.setModel(getString("Enter model: "));
+        vehicle.setBaseRentalRate(getDouble("Enter new rental rate: "));
+        vehicle.setColor(getString("Enter color: "));
+        vehicle.setTransmission(getString("Enter transmission type: "));
+        vehicle.setFuelType(getString("Enter fuel type: "));
+
+        // Since all subclasses have at least 1 specific property not available in the vehicle class, direct manipulation
+        // is not feasible. I initially intended to use instanceOf() and if statements to determine the subclasses
+        // to edit the appropriate fields but the guys on stackoverflow say it's bad practice. So, I declared the
+        // editFeature method which is then overridden by each subclass to edit its fields.
+        vehicle.editFeatures();
+
+        System.out.println("\nVehicle updated successfully!");
+        System.out.println(vehicle);
+
     }
 
 
@@ -350,7 +373,8 @@ public class Main {
         }
         return null;
     }
-// Methods to ask for input.
+
+    // Methods to ask for input.
     private static int getInt(String prompt) {
         while (true) {
             try {
@@ -361,7 +385,8 @@ public class Main {
             }
         }
     }
-    private static double getDouble(String prompt) {
+
+    public static double getDouble(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
@@ -371,7 +396,8 @@ public class Main {
             }
         }
     }
-    private static boolean getBoolean(String prompt) {
+
+    public static boolean getBoolean(String prompt) {
         while (true) {
             System.out.print(prompt);
             String answer = input.nextLine().toLowerCase();
@@ -381,7 +407,8 @@ public class Main {
             System.out.println("Please enter true or false.");
         }
     }
-    private static String getString(String prompt) {
+
+    public static String getString(String prompt) {
         System.out.print(prompt);
         return stringInput.nextLine();
     }

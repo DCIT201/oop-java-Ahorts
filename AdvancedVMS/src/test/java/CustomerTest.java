@@ -71,5 +71,9 @@ class CustomerTest {
         customer.returnVehicle(car);
         assertEquals(1, customer.getCurrentRentals().size());
     }
+    @Test
+    void testDiscountEligibility(){
+        assertFalse(customer.isEligibleForDiscount());
+    }
 
 }

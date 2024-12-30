@@ -62,7 +62,8 @@ public class Main {
             System.out.println("2. View All Customers");
             System.out.println("3. View Customer Rental History");
             System.out.println("4. View Customer Current Rentals");
-            System.out.println("5. Back to Main Menu");
+            System.out.println("5. Customer Loyalty Status");
+            System.out.println("6. Back to Main Menu");
             System.out.println("\n Select an option: ");
 
             int choice = input.nextInt();
@@ -81,6 +82,9 @@ public class Main {
                     viewCustomerCurrentRentals();
                     break;
                 case 5:
+                    loyaltyStatus();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -234,6 +238,20 @@ public class Main {
                     System.out.println(vehicle.toString());
                 }
             }
+        }
+    }
+
+    private static void loyaltyStatus() {
+        Customer customer = findCustomer(getInt("Enter customer ID: "));
+
+        if (customer != null) {
+            System.out.println("\n=== Loyalty Status for " + customer.getName() + " ===");
+            System.out.println("Total Rentals: " + customer.getRentalHistory().size());
+            System.out.println("Discount Status: " + customer.isEligibleForDiscount());
+            System.out.println("Rentals needed for discount: " +
+                    (customer.isEligibleForDiscount() ? 0 : 5 - customer.getRentalHistory().size()));
+        } else {
+            System.out.println("Customer not found!");
         }
     }
 

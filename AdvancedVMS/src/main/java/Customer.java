@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
+// This class handles all customer related operations
 public class Customer {
     private static int id = 0;
     private static final List<Customer> customers = new ArrayList<>();

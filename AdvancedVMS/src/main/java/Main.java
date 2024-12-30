@@ -100,7 +100,8 @@ public class Main {
             System.out.println("5. View Available Vehicles");
             System.out.println("6. Remove Vehicle");
             System.out.println("7. Edit Vehicle");
-            System.out.println("8. Back to Main Menu");
+            System.out.println("8. View Specific Vehicle");
+            System.out.println("9. Back to Main Menu");
             System.out.println("\n Select an option: ");
 
             int choice = input.nextInt();
@@ -127,6 +128,9 @@ public class Main {
                     editVehicle();
                     break;
                 case 8:
+                    viewVehicle();
+                    break;
+                case 9:
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -318,23 +322,43 @@ public class Main {
     }
 
     private static void editVehicle() {
-      Vehicle vehicle =  findVehicle(getInt("Enter vehicle ID: "));
-        assert vehicle != null;
-        vehicle.setModel(getString("Enter model: "));
-        vehicle.setBaseRentalRate(getDouble("Enter new rental rate: "));
-        vehicle.setColor(getString("Enter color: "));
-        vehicle.setTransmission(getString("Enter transmission type: "));
-        vehicle.setFuelType(getString("Enter fuel type: "));
+        Vehicle vehicle = findVehicle(getInt("Enter vehicle ID: "));
+        if (vehicle != null) {
 
-        // Since all subclasses have at least 1 specific property not available in the vehicle class, direct manipulation
-        // is not feasible. I initially intended to use instanceOf() and if statements to determine the subclasses
-        // to edit the appropriate fields but the guys on stackoverflow say it's bad practice. So, I declared the
-        // editFeature method which is then overridden by each subclass to edit its fields.
-        vehicle.editFeatures();
+            vehicle.setModel(getString("Enter model: "));
+            vehicle.setBaseRentalRate(getDouble("Enter new rental rate: "));
+            vehicle.setColor(getString("Enter color: "));
+            vehicle.setTransmission(getString("Enter transmission type: "));
+            vehicle.setFuelType(getString("Enter fuel type: "));
 
-        System.out.println("\nVehicle updated successfully!");
-        System.out.println(vehicle);
+            // Since all subclasses have at least 1 specific property not available in the vehicle class, direct manipulation
+            // is not feasible. I initially intended to use instanceOf() and if statements to determine the subclasses
+            // to edit the appropriate fields but the guys on stackoverflow say it's bad practice. So, I declared the
+            // editFeature method which is then overridden by each subclass to edit its fields.
+            vehicle.editFeatures();
 
+            System.out.println("\nVehicle updated successfully!");
+            System.out.println(vehicle);
+        } else {
+            System.out.println("Vehicle not found!");
+        }
+    }
+
+    private static void viewVehicle() {
+        Vehicle vehicle = findVehicle(getInt("Enter vehicle ID: "));
+        if (vehicle != null) {
+            System.out.println("*=== Vehicle Information ===*");
+            System.out.println("Vehicle ID: " + vehicle.getVehicleId());
+            System.out.println("Model: " + vehicle.getModel());
+            System.out.println("Color: " + vehicle.getColor());
+            System.out.println("Transmission type: " + vehicle.getTransmission());
+            System.out.println("Fuel type: " + vehicle.getFuelType());
+            vehicle.viewFeatures();
+            System.out.println("Rental Rate: " +
+                    RentCalculator.calculateFinalRate(vehicle.getBaseRentalRate(), vehicle.activeFeatures));
+        } else {
+            System.out.println("Vehicle not found!");
+        }
     }
 
 
@@ -344,7 +368,7 @@ public class Main {
         int vehicleId = getInt("Enter vehicle ID: ");
         int daysToRent = getInt("Enter days to rent: ");
 
-        agency.rentVehicle(findCustomer(customerId),
+        agency.rentVehicle(Objects.requireNonNull(findCustomer(customerId)),
                 Objects.requireNonNull(findVehicle(vehicleId)),
                 daysToRent);
     }

@@ -5,9 +5,6 @@ public class Motorcycle extends Vehicle implements Rentable{
 
     public Motorcycle( String model, double baseRentalRate){
         super(model, baseRentalRate);
-        this.hasHelmet = false;
-        this.hasStorageBox = false;
-        this.hasWindshield = false;
     }
     public void setHasStorageBox(boolean hasStorageBox){
         if (hasStorageBox){
@@ -46,6 +43,12 @@ public class Motorcycle extends Vehicle implements Rentable{
     @Override
     public double calculateRent(int days) {
         return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);
+    }
+    public void editFeatures(){
+        activeFeatures.clear();
+        setHasHelmet(Main.getBoolean("Has Helmet? (true/false): "));
+        setHasWindshield(Main.getBoolean("Has Windshield? (true/false): "));
+        setHasStorageBox(Main.getBoolean("Has Storage Box? (true/false): "));
     }
 
     public double rent(Customer customer, int days){

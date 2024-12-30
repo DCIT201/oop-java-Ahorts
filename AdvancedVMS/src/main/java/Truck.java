@@ -6,9 +6,6 @@ public class Truck extends Vehicle implements Rentable{
 
     public Truck( String model, double baseRentalRate){
         super(model, baseRentalRate);
-        hasCamera = false;
-        hasGPS = false;
-        hasAirConditioners = false;
     }
     public void setHasGPS(boolean hasGPS){
         if (hasGPS){
@@ -47,6 +44,12 @@ public class Truck extends Vehicle implements Rentable{
     @Override
     public double calculateRent(int days) {
         return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);
+    }
+    public void editFeatures(){
+        setHasAirConditioners(Main.getBoolean("Has Air Conditioners? (true/false): "));
+        setHasCamera(Main.getBoolean("Has camera? (true/false): "));
+        setHasGPS(Main.getBoolean("Has GPS? (true/false): "));
+        setHasHydraulics(Main.getBoolean("Has Hydraulics? (true/false): "));
     }
 
     public void setHasAirConditioners(boolean hasAirConditioners){

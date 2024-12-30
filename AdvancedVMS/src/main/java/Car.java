@@ -5,7 +5,6 @@ public class Car extends Vehicle implements Rentable{
     private boolean hasCamera;
     public Car( String model, double baseRentalRate){
         super( model, baseRentalRate);
-
     }
 
     public void setHasAirConditioners(boolean hasAirConditioners){
@@ -57,6 +56,14 @@ public class Car extends Vehicle implements Rentable{
     public double calculateRent(int days) {
         return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);
     }
+    public void editFeatures(){
+        activeFeatures.clear();
+        setHasAirConditioners(Main.getBoolean("Has Air Conditioners? (true/false): "));
+        setHasChildSeats(Main.getBoolean("Has Child Seats? (true/false): "));
+        setHasGPS(Main.getBoolean("Has GPS? (true/false): "));
+        setHasCamera(Main.getBoolean("Has camera? (true/false): "));
+    }
+
 
     public double rent(Customer customer, int days){
         if (!super.isAvailable()) throw new IllegalStateException("Car is not available");

@@ -48,7 +48,7 @@ public class Customer {
     }
 
     public void addRentals(Vehicle vehicle) {
-        if (!canRent) throw new IllegalStateException("Customer has reached the maximum number of rentals");
+        if (currentRentals.size() > 3) throw new IllegalStateException("Customer has reached the maximum number of rentals");
         currentRentals.add(vehicle);
         rentalHistory.add(vehicle);
         setCanRent();
@@ -74,10 +74,6 @@ public class Customer {
     }
     public boolean isEligibleForDiscount() {
         return getRentalHistory().size() >= 5;
-    }
-
-    public double getDiscount() {
-        return isEligibleForDiscount() ? 15.0 : 0.0;
     }
 
 }

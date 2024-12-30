@@ -11,6 +11,8 @@ public abstract class Vehicle {
     private String color;
     private String transmission;
     private String fuelType;
+    // I decided to use a map which stores all the multipliers for the features of each vehicle subclass. The
+    // activeFeatures stores the currently enabled features of the specified vehicle
     protected Set<String> activeFeatures;
 
 

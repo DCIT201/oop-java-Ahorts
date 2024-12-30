@@ -247,7 +247,8 @@ public class Main {
         car.setFuelType(getString("Enter fuel type: "));
 
         agency.addVehicle(car);
-        System.out.println("\nCar added successfully! Vehicle ID: " + car.getVehicleId() + "Model: " + car.getModel());
+        System.out.println("\nCar added successfully! Vehicle ID: " + car.getVehicleId() + " || Model: " + car.getModel()
+        + " || Rental rate: " + RentCalculator.calculateFinalRate(rate, car.activeFeatures));
     }
 
     private static void addNewMotorcycle() {

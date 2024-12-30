@@ -1,4 +1,4 @@
-public class Truck extends Vehicle implements Rentable{
+public class Truck extends Vehicle{
     private boolean hasAirConditioners;
     private boolean hasCamera;
     private boolean hasGPS;
@@ -69,21 +69,5 @@ public class Truck extends Vehicle implements Rentable{
     public boolean getHasAirConditioners(){
         return this.hasAirConditioners;
     }
-
-    @Override
-    public double rent(Customer customer, int days){
-        if (!super.isAvailable()) throw new IllegalStateException("Truck is not available");
-
-        setAvailable(false);
-        double cost = calculateRent(days);
-        customer.addToHistory(this);
-        return cost;
-    }
-
-    public void returnVehicle(){
-        setAvailable(true);
-    }
-
-
 
 }

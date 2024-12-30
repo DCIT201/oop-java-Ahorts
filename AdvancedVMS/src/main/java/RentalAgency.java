@@ -47,9 +47,6 @@ public class RentalAgency {
         if (!vehicle.isAvailable()) {
             throw new IllegalStateException("Vehicle is not available for rental.");
         }
-        if (customer.getCurrentRentals().size() > 3) {
-            throw new IllegalStateException("Customer has reached the maximum rental limit.");
-        }
         LocalDate rentalDate = LocalDate.now();
         RentalTransaction transaction = new RentalTransaction(customer, vehicle, rentalDate, daysRented);
         transactions.add(transaction);

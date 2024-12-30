@@ -51,6 +51,7 @@ public class Customer {
         if (!canRent) throw new IllegalStateException("Customer has reached the maximum number of rentals");
         currentRentals.add(vehicle);
         rentalHistory.add(vehicle);
+        setCanRent();
     }
     public List<Vehicle> getCurrentRentals() {
         return currentRentals;
@@ -70,6 +71,13 @@ public class Customer {
     public void returnVehicle(Vehicle vehicle) {
         if (!currentRentals.contains(vehicle)) throw new IllegalArgumentException("Customer has not rented this vehicle");
         currentRentals.remove(vehicle);
+    }
+    public boolean isEligibleForDiscount() {
+        return getRentalHistory().size() >= 5;
+    }
+
+    public double getDiscount() {
+        return isEligibleForDiscount() ? 15.0 : 0.0;
     }
 
 }

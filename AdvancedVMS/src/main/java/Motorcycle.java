@@ -1,4 +1,4 @@
-public class Motorcycle extends Vehicle implements Rentable{
+public class Motorcycle extends Vehicle {
     private boolean hasHelmet;
     private boolean hasStorageBox;
     private boolean hasWindshield;
@@ -56,17 +56,5 @@ public class Motorcycle extends Vehicle implements Rentable{
         System.out.println("Has StorageBox?: " + hasStorageBox());
     }
 
-    @Override
-    public double rent(Customer customer, int days){
-        if (!super.isAvailable()) throw new IllegalStateException("Motorcycle is not available");
 
-        setAvailable(false);
-        double cost = calculateRent(days);
-        customer.addToHistory(this);
-        return cost;
-    }
-
-    public void returnVehicle(){
-        setAvailable(true);
-    }
 }

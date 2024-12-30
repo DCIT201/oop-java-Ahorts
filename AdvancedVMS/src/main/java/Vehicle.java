@@ -1,7 +1,7 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class Vehicle {
+public abstract class Vehicle implements Rentable {
     private static int id = 0;
     private final int vehicleId;
     private String model;
@@ -78,6 +78,17 @@ public abstract class Vehicle {
     }
     public int getSeatCount() {
         return seatCount;
+    }
+    public void returnVehicle(){
+        setAvailable(true);
+    }
+    public void rent(Customer customer, int days){
+        if (!this.isAvailable()) throw new IllegalStateException("Vehicle is not available");
+
+        setAvailable(false);
+        double cost = calculateRent(days);
+        customer.addRentals(this);
+
     }
 
     @Override

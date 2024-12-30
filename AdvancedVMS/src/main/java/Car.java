@@ -1,4 +1,4 @@
-public class Car extends Vehicle implements Rentable{
+public class Car extends Vehicle {
     private boolean hasAirConditioners;
     private boolean hasChildSeats;
     private boolean hasGPS;
@@ -71,17 +71,4 @@ public class Car extends Vehicle implements Rentable{
     }
 
 
-    @Override
-    public double rent(Customer customer, int days){
-        if (!super.isAvailable()) throw new IllegalStateException("Car is not available");
-
-        setAvailable(false);
-        double cost = calculateRent(days);
-        customer.addToHistory(this);
-        return cost;
-    }
-
-    public void returnVehicle(){
-        setAvailable(true);
-    }
 }

@@ -19,8 +19,7 @@ public class RentalTransaction {
         this.rentalDate = rentalDate;
         this.rentalDays = rentalDays;
         this.isCompleted = false;
-        vehicle.setAvailable(false);
-        customer.addRentals(vehicle);
+       vehicle.rent(customer, rentalDays);
     }
 
     public Customer getCustomer() {
@@ -48,7 +47,7 @@ public class RentalTransaction {
             throw new IllegalStateException("Transaction is already completed.");
         }
         isCompleted = true;
-        vehicle.setAvailable(true);
+        vehicle.returnVehicle();
         customer.returnVehicle(vehicle);
     }
 
@@ -60,7 +59,7 @@ public class RentalTransaction {
                 ", customer=" + customer.getName() +
                 ", vehicle=" + vehicle.getModel() +
                 ", rentalDate=" + rentalDate +
-                ", rentalDays=" + rentalDays + "," +
+                ", rentalDays=" + rentalDays +
                 ", returnDate=" + this.getReturnDate() +
                 ", isCompleted=" + isCompleted +
                 " Cost=" + this.calculateTotalCost() + "]";

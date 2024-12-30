@@ -22,9 +22,6 @@ public class RentalTransaction {
        vehicle.rent(customer, rentalDays);
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
     public Vehicle getVehicle() {
         return vehicle;
     }
@@ -38,14 +35,15 @@ public class RentalTransaction {
         return rentalDate.plusDays(rentalDays);
     }
     public double calculateTotalCost() {
+        if (customer.isEligibleForDiscount()){
+            return vehicle.calculateRent(rentalDays) * 0.85;
+        }
         return vehicle.calculateRent(rentalDays);
     }
 
     // This method marks the transaction as complete when the customer returns the vehicle.
     public void markAsCompleted() {
-        if (isCompleted) {
-            throw new IllegalStateException("Transaction is already completed.");
-        }
+
         isCompleted = true;
         vehicle.returnVehicle();
         customer.returnVehicle(vehicle);

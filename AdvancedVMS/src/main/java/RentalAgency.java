@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class RentalAgency {
     public void removeVehicle(int vehicleId) {
         agencyVehicles.removeIf(vehicle -> Objects.equals(vehicle.getVehicleId(), vehicleId));
     }
-    public void rentVehicle(Customer customer, Vehicle vehicle, int daysRented) {
+    public void rentVehicle(@NotNull Customer customer, @NotNull Vehicle vehicle, int daysRented) {
         if (!vehicle.isAvailable()) {
             throw new IllegalStateException("Vehicle is not available for rental.");
         }

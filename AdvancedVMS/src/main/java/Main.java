@@ -318,7 +318,7 @@ public class Main {
 
     private static void removeVehicle() {
         agency.removeVehicle(getInt("Enter vehicle ID: "));
-        System.out.println("Vehicle removed successfully!");
+        System.out.println("Vehicle removed successfully! / Vehicle does not exist!");
     }
 
     private static void editVehicle() {

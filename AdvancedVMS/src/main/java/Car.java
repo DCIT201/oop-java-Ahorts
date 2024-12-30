@@ -21,10 +21,10 @@ public class Car extends Vehicle implements Rentable{
     }
     public void setHasChildSeats(boolean hasChildSeats){
         if(hasChildSeats){
-            activeFeatures.add("CHILD_SEATS");
+            activeFeatures.add("CHILD_SEAT");
         }
         else{
-            activeFeatures.remove("CHILD_SEATS");
+            activeFeatures.remove("CHILD_SEAT");
         }
         this.hasChildSeats = hasChildSeats;
     }
@@ -53,7 +53,6 @@ public class Car extends Vehicle implements Rentable{
     public boolean getHasCamera(){
         return hasCamera;
     }
-
     @Override
     public double calculateRent(int days) {
         return days * RentCalculator.calculateFinalRate(getBaseRentalRate(), activeFeatures);

@@ -63,8 +63,15 @@ public class Car extends Vehicle implements Rentable{
         setHasGPS(Main.getBoolean("Has GPS? (true/false): "));
         setHasCamera(Main.getBoolean("Has camera? (true/false): "));
     }
+    public void viewFeatures(){
+        System.out.println("Has Air Conditioners?: " + getHasAirConditioners());
+        System.out.println("Has Child Seats?: " + getHasChildSeats());
+        System.out.println("Has GPS?: " + getHasGPS());
+        System.out.println("Has Camera?: " + getHasCamera());
+    }
 
 
+    @Override
     public double rent(Customer customer, int days){
         if (!super.isAvailable()) throw new IllegalStateException("Car is not available");
 

@@ -1,7 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
+// This class is made to calculate the increase in price based on the available features. This is to also help
+// me add new features down the line without rewriting code.
 public class RentCalculator {
     private static final Map<String, Double> MULTIPLIERS = new HashMap<>();
     static {

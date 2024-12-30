@@ -71,6 +71,7 @@ public abstract class Vehicle {
     // The method below is declared abstract to be overridden by its subclasses based on specific features.
     // See Main.editVehicle() for implementation and reasoning
     public abstract void editFeatures();
+    public abstract void viewFeatures();
 
     public void setSeatCount(int seatCount) {
         this.seatCount = seatCount;

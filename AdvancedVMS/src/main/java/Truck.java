@@ -51,6 +51,12 @@ public class Truck extends Vehicle implements Rentable{
         setHasGPS(Main.getBoolean("Has GPS? (true/false): "));
         setHasHydraulics(Main.getBoolean("Has Hydraulics? (true/false): "));
     }
+    public void viewFeatures(){
+        System.out.println("Has Air Conditioners?: " + getHasAirConditioners());
+        System.out.println("Has Camera?: " + getHasCamera());
+        System.out.println("Has GPS?: " + getHasGPS());
+        System.out.println("Has Hydraulics?: " + getHasHydraulics());
+    }
 
     public void setHasAirConditioners(boolean hasAirConditioners){
         if (hasAirConditioners) {
@@ -64,6 +70,7 @@ public class Truck extends Vehicle implements Rentable{
         return this.hasAirConditioners;
     }
 
+    @Override
     public double rent(Customer customer, int days){
         if (!super.isAvailable()) throw new IllegalStateException("Truck is not available");
 

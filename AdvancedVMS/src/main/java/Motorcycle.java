@@ -50,7 +50,13 @@ public class Motorcycle extends Vehicle implements Rentable{
         setHasWindshield(Main.getBoolean("Has Windshield? (true/false): "));
         setHasStorageBox(Main.getBoolean("Has Storage Box? (true/false): "));
     }
+    public void viewFeatures(){
+        System.out.println("Has Helmet?: " + hasHelmet());
+        System.out.println("Has Windshield?: " + hasWindshield());
+        System.out.println("Has StorageBox?: " + hasStorageBox());
+    }
 
+    @Override
     public double rent(Customer customer, int days){
         if (!super.isAvailable()) throw new IllegalStateException("Motorcycle is not available");
 

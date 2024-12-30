@@ -84,11 +84,8 @@ public abstract class Vehicle implements Rentable {
     }
     public void rent(Customer customer, int days){
         if (!this.isAvailable()) throw new IllegalStateException("Vehicle is not available");
-
         setAvailable(false);
-        double cost = calculateRent(days);
         customer.addRentals(this);
-
     }
 
     @Override

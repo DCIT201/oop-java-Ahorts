@@ -53,11 +53,17 @@ public class RentalAgency {
     }
     //return rented vehicle
     public void returnVehicle(Vehicle vehicle) {
+        RentalTransaction latestTransaction = null;
 
         for (RentalTransaction transaction : transactions) {
-            if (transaction.getVehicle().equals(vehicle)) {
-                transaction.markAsCompleted();
+            if (transaction.getVehicle().equals(vehicle) && !transaction.isCompleted()) {
+                latestTransaction = transaction;
             }
+        }
+        if (latestTransaction != null) {
+                latestTransaction.markAsCompleted();
+        } else {
+            throw new IllegalStateException("No rental transaction found for vehicle: " + vehicle);
         }
     }
     public String generateRentalReport() {

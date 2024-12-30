@@ -23,9 +23,6 @@ public abstract class Vehicle {
         this.baseRentalRate = baseRentalRate;
         this.isAvailable = true;
         this.seatCount = 1;
-        this.color = "white";
-        this.transmission = "automatic";
-        this.fuelType = "petrol";
         this.activeFeatures = new HashSet<>();
     }
     public int getVehicleId() {
@@ -71,6 +68,9 @@ public abstract class Vehicle {
     }
 
     public abstract double calculateRent(int days);
+    // The method below is declared abstract to be overridden by its subclasses based on specific features.
+    // See Main.editVehicle() for implementation and reasoning
+    public abstract void editFeatures();
 
     public void setSeatCount(int seatCount) {
         this.seatCount = seatCount;
@@ -81,7 +81,8 @@ public abstract class Vehicle {
 
     @Override
     public String toString(){
-        return "[Vehicle: " +  getClass().getSimpleName() + "." + " VehicleId=" + getVehicleId() + " Model=" + getModel() + "]";
+        return "[Vehicle: " +  getClass().getSimpleName() + "." + " VehicleId=" + getVehicleId() + " Model=" + getModel() +
+                ". Rental Rate=" + RentCalculator.calculateFinalRate(getBaseRentalRate(),activeFeatures) + "]";
     }
 
 }
